@@ -20,9 +20,10 @@ content:
       - { name: tags, label: Tags, type: string, list: true }
       - { name: description, label: Description, type: string }
       - { name: body, label: Body, type: rich-text }
-  - name: 'artist'
-    label: 'Artist'
-    folder: 'src/artists'
+  - name: artist
+    label: Artist
+    type: collection
+    path: src/artists
     create: true
     slug: '{{slug}}'
     fields:

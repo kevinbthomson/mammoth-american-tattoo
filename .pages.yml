@@ -5,7 +5,7 @@ content:
   - name: posts
     label: Posts
     type: collection
-    path: src/content/blog
+    path: src/blog
     view:
       fields: [title, draft, date]
     fields:
@@ -20,24 +20,34 @@ content:
       - { name: tags, label: Tags, type: string, list: true }
       - { name: description, label: Description, type: string }
       - { name: body, label: Body, type: rich-text }
-  - name: artists
-    label: Artists
-    type: collection
-    path: src/content/blog
-    view:
-      fields: [title, draft, date]
+  - name: 'artist'
+    label: 'Artist'
+    folder: 'src/artists'
+    create: true
+    slug: '{{slug}}'
     fields:
-      - { name: author, label: Author, type: string }
-      - { name: pubDatetime, label: Date, type: date }
-      - { name: modDatetime, label: Date, type: date }
-      - { name: title, label: Title, type: string, required: true }
-      - { name: ogImage, label: Title, type: string }
-      - { name: slug, label: Slug, type: string }
-      - { name: featured, label: Featured, type: boolean }
-      - { name: draft, label: Draft, type: boolean }
-      - { name: tags, label: Tags, type: string, list: true }
-      - { name: description, label: Description, type: string }
-      - { name: body, label: Body, type: rich-text }
+      - { label: 'Name', name: 'name', widget: 'string' }
+      - {
+          label: 'Instagram',
+          name: 'instagram',
+          widget: 'string',
+          required: false,
+        }
+      - { label: 'Image', name: 'image', widget: 'image', required: false }
+      - { label: 'Tags', name: 'tags', widget: 'list', default: ['artist'] }
+      - {
+          label: 'Active',
+          name: 'active',
+          widget: 'boolean',
+          required: true,
+          default: true,
+        }
+      - {
+          label: 'Featured',
+          name: 'featured',
+          widget: 'boolean',
+          default: false,
+        }
   - name: about
     label: About page
     type: file
@@ -47,7 +57,25 @@ content:
           name: layout,
           type: string,
           hidden: true,
-          default: '../layouts/AboutLayout.astro',
+          default: '../layouts/Layout.astro',
+        }
+      - { name: title, label: Title, type: string }
+      - {
+          name: body,
+          label: Body,
+          type: rich-text,
+          options: { input: public/assets, output: /assets },
+        }
+  - name: aftercare
+    label: Aftercare page
+    type: file
+    path: src/pages/aftercare.md
+    fields:
+      - {
+          name: layout,
+          type: string,
+          hidden: true,
+          default: '../layouts/Layout.astro',
         }
       - { name: title, label: Title, type: string }
       - {

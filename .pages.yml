@@ -25,28 +25,28 @@ content:
     type: collection
     path: src/artists
     create: true
-    slug: '{{slug}}'
+    slug: "{{slug}}"
     fields:
-      - { label: 'Name', name: 'name', widget: 'string' }
+      - { label: "Name", name: "name", widget: "string" }
       - {
-          label: 'Instagram',
-          name: 'instagram',
-          widget: 'string',
+          label: "Instagram",
+          name: "instagram",
+          widget: "string",
           required: false,
         }
-      - { label: 'Image', name: 'image', widget: 'image', required: false }
-      - { label: 'Tags', name: 'tags', widget: 'list', default: ['artist'] }
+      - { label: "Image", name: "image", widget: "image", required: false }
+      - { label: "Tags", name: "tags", widget: "list", default: ["artist"] }
       - {
-          label: 'Active',
-          name: 'active',
-          widget: 'boolean',
+          label: "Active",
+          name: "active",
+          widget: "boolean",
           required: true,
           default: true,
         }
       - {
-          label: 'Featured',
-          name: 'featured',
-          widget: 'boolean',
+          label: "Featured",
+          name: "featured",
+          widget: "boolean",
           default: false,
         }
   - name: about
@@ -58,7 +58,7 @@ content:
           name: layout,
           type: string,
           hidden: true,
-          default: '../layouts/Layout.astro',
+          default: "../layouts/Layout.astro",
         }
       - { name: title, label: Title, type: string }
       - {
@@ -76,7 +76,7 @@ content:
           name: layout,
           type: string,
           hidden: true,
-          default: '../layouts/Layout.astro',
+          default: "../layouts/Layout.astro",
         }
       - { name: title, label: Title, type: string }
       - {

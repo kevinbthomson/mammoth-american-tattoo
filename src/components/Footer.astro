@@ -1,15 +1,15 @@
 ---
 import site from '../_data/site.json';
 
-
+const { title, description, url, address, phone, email } = site;
 ---
 
 <footer>
   <div class="footer-content">
       <div class="footer-section">
           <h3>Studio Location</h3>
-          <p>789 Heritage Street<br>Cultural District<br>City Center, State 12345</p>
-          <p>Phone: (555) 456-7890<br>Email: info@crimsonquill.com</p>
+          <p>{site.address}</p>
+          <p>Phone: {site.phone}<br>Email: {site.email}</p>
       </div>
       <div class="footer-section">
           <h3>Studio Hours</h3>
@@ -17,20 +17,20 @@ import site from '../_data/site.json';
               <li>Monday: Closed</li>
               <li>Tuesday - Thursday: 11AM - 7PM</li>
               <li>Friday - Saturday: 11AM - 8PM</li>
-              <li>Sunday: 12PM - 6PM</li>
+              <li>Sunday: Closed</li>
           </ul>
       </div>
       <div class="footer-section">
           <h3>Follow Our Work</h3>
           <ul>
-              <li><a href="#">Instagram: @crimsonquillstudio</a></li>
-              <li><a href="#">Facebook: Crimson Quill Tattoo</a></li>
-              <li><a href="#">Pinterest: Crimson Quill Art</a></li>
+              <li><a href="https://www.instagram.com/mammothamericantattoo/">Instagram: @mammothamericantattoo</a></li>
+              <li><a href="https://www.facebook.com/mammothamericantattoo">Facebook: Mammoth American Tattoo</a></li>
           </ul>
       </div>
   </div>
+  
   <div class="footer-bottom">
-      <p>&copy; 2025 Crimson Quill Tattoo Studio. All rights reserved.</p>
+      <p>&copy; 2025 Mammoth American Tattoo. All rights reserved.</p>
   </div>
 </footer>
 

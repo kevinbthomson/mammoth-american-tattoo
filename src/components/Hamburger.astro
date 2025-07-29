@@ -1,14 +1,33 @@
 ---
-const { isOpen, setIsOpen } = Astro.props;
+
 ---
 
 <script>
+  const button = document.querySelector('button');
+  let isOpen = false;
+  
   const handleClick = () => {
-    setIsOpen(!isOpen);
+    isOpen = !isOpen;
+    
+    if (isOpen) {
+      button?.classList.add('open');
+    }
+    
+    if (!isOpen) {
+      button?.classList.remove('open');
+    }
+    
+    console.log(isOpen);
   };
+
+
+  button?.addEventListener('click', handleClick);
+
+
+
 </script>
 
-<button type="button" class="hamburger" onclick={handleClick}>
+<button type="button" class="hamburger">
   <span class="line"></span>
   <span class="line"></span>
   <span class="line"></span>

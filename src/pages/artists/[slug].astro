@@ -1,0 +1,71 @@
+---
+import type { GetStaticPaths } from "astro";
+import {sanityClient} from 'sanity:client'
+import Layout from '../../layouts/Layout.astro'
+// import PortableText from '../../components/PortableText.astro'
+import SanityImage from '../../components/SanityImage.astro'
+import type { Artist } from '../../types/artist'
+
+interface Props {
+  artist: Artist;
+}
+
+export async function  getStaticPaths() {
+  const artists = await sanityClient.fetch(
+    `*[_type == "artist"]`
+  )
+  
+  return artists.map((artist: Artist) => {
+    return {
+      params: { slug: artist.slug.current },
+      props: { artist },
+    }
+  });
+}
+
+const { artist } = Astro.props as Props;
+---
+
+<Layout title={artist.name}>
+  <article>
+    <h1>{artist.name}</h1>
+    
+    <div class="artist-image-container">
+
+    </div>
+    <SanityImage class="artist-image" node={artist.image} width="600" />
+    
+    {artist.portfolio && (
+      <ul>
+        {artist.portfolio.map((image) => <li><SanityImage node={image} width="300" /></li>)}
+      </ul>
+    )}
+    
+  </article>
+</Layout>
+
+<style>
+  ul {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 340px));
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+
+    & li {
+      border: 20px solid yellowgreen;
+
+      & img {
+        width: 100%;
+      }
+    }
+  }
+
+  .artist-image-container {
+    border-radius: 50%;
+    overflow: hidden;
+    margin-inline: auto;
+    
+  }
+</style>

@@ -1,15 +1,20 @@
 ---
-import site from '../_data/site.json';
+import {sanityClient} from 'sanity:client';
 
-const { title, description, url, address, phone, email } = site;
+const siteSettings = await sanityClient.fetch(
+  `*[_type == "siteSettings"]`
+);
+
+const { siteTitle, siteDescription, url, address, phone, email } = siteSettings[0];
 ---
 
 <footer>
   <div class="footer-content">
       <div class="footer-section">
           <h3>Studio Location</h3>
-          <p>{site.address}</p>
-          <p>Phone: {site.phone}<br>Email: {site.email}</p>
+          <p>{address}</p>
+          <p>Phone: {phone}</p>
+          <p>Email: {email}</p>
       </div>
       <div class="footer-section">
           <h3>Studio Hours</h3>
@@ -30,7 +35,7 @@ const { title, description, url, address, phone, email } = site;
   </div>
   
   <div class="footer-bottom">
-      <p>&copy; 2025 Mammoth American Tattoo. All rights reserved.</p>
+      <p>&copy; {new Date().getFullYear()} {siteTitle}. All rights reserved.</p>
   </div>
 </footer>
 

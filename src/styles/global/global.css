@@ -1,0 +1,19 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+}
+
+.page-layout {
+  display: grid;
+  min-height: 100dvh;
+}
+
+.container {
+}

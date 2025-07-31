@@ -1,20 +1,18 @@
 ---
-import {sanityClient} from 'sanity:client';
+import { sanityClient } from 'sanity:client';
 import Layout from '../layouts/Layout.astro';
 import Hamburger from '../components/Hamburger.astro';
 import type { Artist } from '../types/artist';
 
-const artists = await sanityClient.fetch(
-  `*[_type == "artist"]`,
-);
+const artists = await sanityClient.fetch(`*[_type == "artist"]`);
 ---
 
 <Layout title="Sanity.io blog">
   <h1>Mammoth American</h1>
 
   <Hamburger />
-  
-	<ul>
+
+  <ul>
     {
       artists.map((artist: Artist) => (
         <li>

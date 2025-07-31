@@ -1,25 +1,23 @@
 ---
-import type { GetStaticPaths } from "astro";
-import {sanityClient} from 'sanity:client'
-import Layout from '../../layouts/Layout.astro'
+import type { GetStaticPaths } from 'astro';
+import { sanityClient } from 'sanity:client';
+import Layout from '../../layouts/Layout.astro';
 // import PortableText from '../../components/PortableText.astro'
-import SanityImage from '../../components/SanityImage.astro'
-import type { Artist } from '../../types/artist'
+import SanityImage from '../../components/SanityImage.astro';
+import type { Artist } from '../../types/artist';
 
 interface Props {
   artist: Artist;
 }
 
-export async function  getStaticPaths() {
-  const artists = await sanityClient.fetch(
-    `*[_type == "artist"]`
-  )
-  
+export async function getStaticPaths() {
+  const artists = await sanityClient.fetch(`*[_type == "artist"]`);
+
   return artists.map((artist: Artist) => {
     return {
       params: { slug: artist.slug.current },
       props: { artist },
-    }
+    };
   });
 }
 
@@ -29,18 +27,21 @@ const { artist } = Astro.props as Props;
 <Layout title={artist.name}>
   <article>
     <h1>{artist.name}</h1>
-    
-    <div class="artist-image-container">
 
-    </div>
+    <div class="artist-image-container"></div>
     <SanityImage class="artist-image" node={artist.image} width="600" />
-    
-    {artist.portfolio && (
-      <ul>
-        {artist.portfolio.map((image) => <li><SanityImage node={image} width="300" /></li>)}
-      </ul>
-    )}
-    
+
+    {
+      artist.portfolio && (
+        <ul>
+          {artist.portfolio.map((image) => (
+            <li>
+              <SanityImage node={image} width="300" />
+            </li>
+          ))}
+        </ul>
+      )
+    }
   </article>
 </Layout>
 
@@ -66,6 +67,5 @@ const { artist } = Astro.props as Props;
     border-radius: 50%;
     overflow: hidden;
     margin-inline: auto;
-    
   }
 </style>

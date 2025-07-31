@@ -1,94 +1,99 @@
 ---
-import {sanityClient} from 'sanity:client';
+import { sanityClient } from 'sanity:client';
 
-const siteSettings = await sanityClient.fetch(
-  `*[_type == "siteSettings"]`
-);
+const siteSettings = await sanityClient.fetch(`*[_type == "siteSettings"]`);
 
-const { siteTitle, siteDescription, url, address, phone, email } = siteSettings[0];
+const { siteTitle, siteDescription, url, address, phone, email } =
+  siteSettings[0];
 ---
 
 <footer>
   <div class="footer-content">
-      <div class="footer-section">
-          <h3>Studio Location</h3>
-          <p>{address}</p>
-          <p>Phone: {phone}</p>
-          <p>Email: {email}</p>
-      </div>
-      <div class="footer-section">
-          <h3>Studio Hours</h3>
-          <ul>
-              <li>Monday: Closed</li>
-              <li>Tuesday - Thursday: 11AM - 7PM</li>
-              <li>Friday - Saturday: 11AM - 8PM</li>
-              <li>Sunday: Closed</li>
-          </ul>
-      </div>
-      <div class="footer-section">
-          <h3>Follow Our Work</h3>
-          <ul>
-              <li><a href="https://www.instagram.com/mammothamericantattoo/">Instagram: @mammothamericantattoo</a></li>
-              <li><a href="https://www.facebook.com/mammothamericantattoo">Facebook: Mammoth American Tattoo</a></li>
-          </ul>
-      </div>
+    <div class="footer-section">
+      <h3>Studio Location</h3>
+      <p>{address}</p>
+      <p>Phone: {phone}</p>
+      <p>Email: {email}</p>
+    </div>
+    <div class="footer-section">
+      <h3>Studio Hours</h3>
+      <ul>
+        <li>Monday: Closed</li>
+        <li>Tuesday - Thursday: 11AM - 7PM</li>
+        <li>Friday - Saturday: 11AM - 8PM</li>
+        <li>Sunday: Closed</li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Follow Our Work</h3>
+      <ul>
+        <li>
+          <a href="https://www.instagram.com/mammothamericantattoo/"
+            >Instagram: @mammothamericantattoo</a>
+        </li>
+        <li>
+          <a href="https://www.facebook.com/mammothamericantattoo"
+            >Facebook: Mammoth American Tattoo</a>
+        </li>
+      </ul>
+    </div>
   </div>
-  
+
   <div class="footer-bottom">
-      <p>&copy; {new Date().getFullYear()} {siteTitle}. All rights reserved.</p>
+    <p>&copy; {new Date().getFullYear()} {siteTitle}. All rights reserved.</p>
   </div>
 </footer>
 
 <style>
   footer {
-      background: linear-gradient(135deg, #2c1810 0%, #1a0f08 100%);
-      color: #faf8f5;
-      padding: 4rem 0 2rem;
-      margin-top: 5rem;
+    background: linear-gradient(135deg, #2c1810 0%, #1a0f08 100%);
+    color: #faf8f5;
+    padding: 4rem 0 2rem;
+    margin-top: 5rem;
   }
 
   .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
   }
 
   .footer-section h3 {
-      color: #8b1538;
-      margin-bottom: 1.5rem;
-      font-size: 1.3rem;
-      font-weight: 600;
+    color: #8b1538;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    font-weight: 600;
   }
 
   .footer-section p,
   .footer-section li {
-      color: #d4cfc6;
-      line-height: 1.8;
-      margin-bottom: 0.5rem;
+    color: #d4cfc6;
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
   }
 
   .footer-section ul {
-      list-style: none;
+    list-style: none;
   }
 
   .footer-section a {
-      color: #d4cfc6;
-      text-decoration: none;
-      transition: color 0.3s ease;
+    color: #d4cfc6;
+    text-decoration: none;
+    transition: color 0.3s ease;
   }
 
   .footer-section a:hover {
-      color: #8b1538;
+    color: #8b1538;
   }
 
   .footer-bottom {
-      text-align: center;
-      padding-top: 2rem;
-      margin-top: 2rem;
-      border-top: 1px solid #444;
-      color: #999;
+    text-align: center;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: 1px solid #444;
+    color: #999;
   }
 </style>

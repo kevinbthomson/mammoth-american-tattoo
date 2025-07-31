@@ -1,2 +1,26 @@
 :root {
+  --primary-color: #51081b;
+  --primary-color-light: #730220;
+  --blue: #3bacf5;
+  --highlight-color: #f4a708;
+  --white: #ffffff;
+  --black: #000000;
+  --pink: rgb(232, 156, 186);
+
+  --gray-10: rgba(0, 0, 0, 0.1);
+  --gray-20: rgba(0, 0, 0, 0.2);
+  --gray-30: rgba(0, 0, 0, 0.3);
+  --gray-40: rgba(0, 0, 0, 0.4);
+  --gray-50: rgba(0, 0, 0, 0.5);
+  --gray-60: rgba(0, 0, 0, 0.6);
+  --gray-80: rgba(0, 0, 0, 0.8);
+
+  --body-font: 'Roboto Condensed', sans-serif;
+  --logo-font: 'Cinzel Decorative', serif;
+  --heading-font: 'Cinzel Decorative', serif;
 }
+
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;

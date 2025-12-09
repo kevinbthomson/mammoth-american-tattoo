@@ -1,17 +1,17 @@
-.cinzel-decorative-regular {
-  font-family: 'Cinzel Decorative', serif;
+body {
+  font-family: 'Roboto Condensed', sans-serif;
   font-weight: 400;
   font-style: normal;
 }
 
-.cinzel-decorative-bold {
-  font-family: 'Cinzel Decorative', serif;
+.roboto-condensed-bold {
+  font-family: 'Roboto Condensed', sans-serif;
   font-weight: 700;
   font-style: normal;
 }
 
-.cinzel-decorative-black {
-  font-family: 'Cinzel Decorative', serif;
+.roboto-condensed-black {
+  font-family: 'Roboto Condensed', sans-serif;
   font-weight: 900;
   font-style: normal;
 }

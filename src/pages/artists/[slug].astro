@@ -1,6 +1,7 @@
 ---
 import type { GetStaticPaths } from 'astro';
 import { sanityClient } from 'sanity:client';
+import imageUrlBuilder from '@sanity/image-url';
 import Layout from '../../layouts/Layout.astro';
 // import PortableText from '../../components/PortableText.astro'
 import SanityImage from '../../components/SanityImage.astro';
@@ -36,7 +37,13 @@ const { artist } = Astro.props as Props;
         <ul>
           {artist.portfolio.map((image) => (
             <li>
-              <SanityImage node={image} width="300" />
+              <a
+                href={imageUrlBuilder(sanityClient).image(image.asset).url()}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <SanityImage node={image} width="300" />
+              </a>
             </li>
           ))}
         </ul>
@@ -55,10 +62,11 @@ const { artist } = Astro.props as Props;
     padding: 0;
 
     & li {
-      border: 20px solid yellowgreen;
-
+      border: 10px solid yellowgreen;
+      border-radius: 10px;
       & img {
         width: 100%;
+        border-radius: 10px;
       }
     }
   }

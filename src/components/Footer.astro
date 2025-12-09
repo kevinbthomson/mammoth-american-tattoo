@@ -3,7 +3,7 @@ import { sanityClient } from 'sanity:client';
 
 const siteSettings = await sanityClient.fetch(`*[_type == "siteSettings"]`);
 
-const { siteTitle, siteDescription, url, address, phone, email } =
+const { siteTitle, address, phone, email, instagram, facebook } =
   siteSettings[0];
 ---
 
@@ -28,12 +28,14 @@ const { siteTitle, siteDescription, url, address, phone, email } =
       <h3>Follow Our Work</h3>
       <ul>
         <li>
-          <a href="https://www.instagram.com/mammothamericantattoo/"
-            >Instagram: @mammothamericantattoo</a>
+          <a href=`https://www.instagram.com/${instagram}` target="_blank">
+            >Instagram: @{instagram}</a
+          >
         </li>
         <li>
-          <a href="https://www.facebook.com/mammothamericantattoo"
-            >Facebook: Mammoth American Tattoo</a>
+          <a href=`https://www.facebook.com/${facebook}` target="_blank">
+            Facebook: {facebook}</a
+          >
         </li>
       </ul>
     </div>

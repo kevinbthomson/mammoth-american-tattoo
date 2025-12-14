@@ -2,10 +2,9 @@
   --primary-color: #51081b;
   --primary-color-light: #730220;
   --blue: #3bacf5;
-  --highlight-color: #fecd48;
+  --highlight-color: #e3d19f;
   --white: #ffffff;
   --black: #000000;
-  --pink: #fe5fbb;
 
   --gray-10: rgba(0, 0, 0, 0.1);
   --gray-20: rgba(0, 0, 0, 0.2);
@@ -15,8 +14,8 @@
   --gray-60: rgba(0, 0, 0, 0.6);
   --gray-80: rgba(0, 0, 0, 0.8);
 
-  --body-font: 'Roboto Condensed', sans-serif;
-  --heading-font: 'Roboto Slab', serif;
+  --body-font: 'EB Garamond', serif;
+  --heading-font: 'New Rocker', system-ui;
 }
 
 $breakpoint-sm: 576px;

@@ -1,17 +1,21 @@
-body {
-  font-family: 'Roboto Condensed', sans-serif;
+h1,
+h2,
+h3,
+.new-rocker-regular {
+  font-family: 'New Rocker', system-ui;
   font-weight: 400;
   font-style: normal;
 }
 
-.roboto-condensed-bold {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-weight: 700;
+body {
+  font-weight: 400;
   font-style: normal;
 }
 
-.roboto-condensed-black {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-weight: 900;
-  font-style: normal;
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
 }

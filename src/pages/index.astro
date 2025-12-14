@@ -9,8 +9,8 @@ const site = siteSettings[0];
 
 <Layout title={site.siteTitle}>
   <div class="hero-banner">
-    <!-- <img src="/images/logo.png" alt="Mammoth American Tattoo" /> -->
     <h1>{site.siteTitle}</h1>
+    <!-- <img src="/images/logo.png" alt="Mammoth American Tattoo" width="120px" /> -->
   </div>
   <!-- <GoogleMap /> -->
 </Layout>
@@ -25,26 +25,32 @@ const site = siteSettings[0];
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
-    height: 80dvh;
-    padding: 2rem;
-    text-align: center;
+    height: calc(100dvh - 9.5rem);
     width: 100dvw;
     z-index: 1;
-    justify-content: center;
   }
 
   h1 {
-    font-size: 3rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    font-size: 4rem;
     line-height: 1.12;
+    margin-block-start: 8rem;
+    padding-block: 1rem;
+    text-align: center;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
   }
 
   @media screen and (min-width: 900px) {
     .hero-banner {
+      justify-content: center;
       height: 50dvh;
     }
+
     h1 {
+      margin-block-start: 0;
       font-size: 6rem;
+      padding-inline: 2vw;
     }
   }
 </style>

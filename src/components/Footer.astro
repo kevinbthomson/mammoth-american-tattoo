@@ -10,28 +10,29 @@ const { siteTitle, address, phone, email, instagram, facebook } =
 <footer>
   <div class="footer-content">
     <div class="footer-section">
-      <h3>Studio Location</h3>
+      <h3>Studio</h3>
       <p>
         <a
           href="https://www.google.com/maps/place/Mammoth+American+Tattoo/@39.7546897,-104.9668086,17z/data=!3m1!4b1!4m6!3m5!1s0x876b879cac505b19:0xf28717647faec95e!8m2!3d39.7546856!4d-104.9642337!16s%2Fg%2F1q6jkb7bn?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D"
-          target="_blank">{address}</a>
+          target="_blank">{address}</a
+        >
       </p>
       <p><a href=`tel:${phone}`>{phone}</a></p>
       <p><a href=`mailto:${email}`>{email}</a></p>
     </div>
 
     <div class="footer-section">
-      <h3>Studio Hours</h3>
+      <h3>Hours</h3>
       <ul>
         <li>Monday: Closed</li>
-        <li>Tuesday - Thursday: 11AM - 7PM</li>
-        <li>Friday - Saturday: 11AM - 8PM</li>
+        <li>Tuesday - Thursday: 11am - 7pm</li>
+        <li>Friday - Saturday: 11am - 8pm</li>
         <li>Sunday: Closed</li>
       </ul>
     </div>
 
     <div class="footer-section">
-      <h3>Follow Our Work</h3>
+      <h3>Follow our work</h3>
       <ul>
         <li>
           <a href=`https://www.instagram.com/${instagram}` target="_blank">
@@ -71,8 +72,8 @@ const { siteTitle, address, phone, email, instagram, facebook } =
 
   .footer-section h3 {
     color: white;
-    margin-bottom: 1.5rem;
-    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
     font-weight: 600;
   }
 
@@ -84,6 +85,8 @@ const { siteTitle, address, phone, email, instagram, facebook } =
   }
 
   .footer-section ul {
+    padding: 0;
+    margin-block-start: 0;
     list-style: none;
   }
 

@@ -38,16 +38,27 @@ a {
 }
 
 main {
-  border-top: 120px solid black;
+  border-top: 7.5rem solid black;
   background-color: var(--white);
-  isolation: isolate;
+  padding-block: 4rem;
 
-  a {
+  & a {
     color: var(--primary-color);
     text-decoration: none;
 
     &:hover {
       text-decoration: underline;
+    }
+  }
+}
+
+.artist-portfolio {
+  & img {
+    border-radius: 0.25rem;
+    transition: scale 0.2s;
+
+    &:hover {
+      scale: 1.1;
     }
   }
 }

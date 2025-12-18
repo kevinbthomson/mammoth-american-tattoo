@@ -26,54 +26,110 @@ const { artist } = Astro.props as Props;
 ---
 
 <Layout title={artist.name}>
-  <article>
+  <article class="container">
     <h1>{artist.name}</h1>
 
-    <div class="artist-image-container"></div>
-    <SanityImage class="artist-image" node={artist.image} width="600" />
+    <!-- <div class="artist-image-container">
+      <SanityImage className="artist-image" node={artist.image} />
+    </div> -->
 
     {
       artist.portfolio && (
-        <ul>
+        <ul class="artist-portfolio">
           {artist.portfolio.map((image) => (
             <li>
-              <a
-                href={imageUrlBuilder(sanityClient).image(image.asset).url()}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                data-image-source={imageUrlBuilder(sanityClient)
+                  .image(image.asset)
+                  .url()}
               >
-                <SanityImage node={image} width="300" />
-              </a>
+                <SanityImage
+                  className="portfolio-image"
+                  mode="cover"
+                  node={image}
+                />
+              </button>
             </li>
           ))}
         </ul>
       )
     }
   </article>
+  <div class="portfolio-background">
+    <img class="big-image" />
+  </div>
 </Layout>
 
 <style>
   ul {
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 340px));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     justify-content: center;
     list-style: none;
     padding: 0;
+  }
 
-    & li {
-      border: 10px solid yellowgreen;
-      border-radius: 10px;
-      & img {
-        width: 100%;
-        border-radius: 10px;
-      }
-    }
+  li {
+    border-radius: 0.25rem;
+    overflow: hidden;
+  }
+
+  button {
+    border: 0;
+    padding: 0;
+    cursor: pointer;
   }
 
   .artist-image-container {
-    border-radius: 50%;
-    overflow: hidden;
+  }
+
+  .artist-image-container img {
     margin-inline: auto;
+    border: 10px solid lime;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+
+  .portfolio-background {
+    display: none;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.8);
+    height: calc(100dvh - 7.5rem);
+    width: 100dvw;
+    top: 7.5rem;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding: 2rem;
+
+    & img {
+      max-height: 100%;
+    }
+  }
+
+  .portfolio-background.open {
+    display: grid;
+    place-content: center;
   }
 </style>
+
+<script>
+  const bigImageBg = document.querySelector('.portfolio-background');
+  const bigImage = document.querySelector('.big-image');
+
+  document.querySelectorAll('ul.artist-portfolio button').forEach((button) => {
+    button.addEventListener('click', () => {
+      const imgUrl = button.dataset.imageSource;
+
+      bigImage.src = imgUrl;
+      bigImageBg?.classList.add('open');
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      bigImageBg?.classList.remove('open');
+    }
+  });
+</script>

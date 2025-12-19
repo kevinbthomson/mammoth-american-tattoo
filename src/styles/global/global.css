@@ -40,7 +40,6 @@ a {
 main {
   border-top: 7.5rem solid black;
   background-color: var(--white);
-  padding-block: 4rem;
 
   & a {
     color: var(--primary-color);

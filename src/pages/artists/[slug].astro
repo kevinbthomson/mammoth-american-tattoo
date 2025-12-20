@@ -7,10 +7,6 @@ import Layout from '../../layouts/Layout.astro';
 import SanityImage from '../../components/SanityImage.astro';
 import type { Artist } from '../../types/artist';
 
-interface Props {
-  artist: Artist;
-}
-
 export async function getStaticPaths() {
   const artists = await sanityClient.fetch(`*[_type == "artist"]`);
 
@@ -23,6 +19,10 @@ export async function getStaticPaths() {
 }
 
 const { artist } = Astro.props as Props;
+
+interface Props {
+  artist: Artist;
+}
 ---
 
 <Layout title={artist.name}>
@@ -55,12 +55,17 @@ const { artist } = Astro.props as Props;
       )
     }
   </article>
-  <div class="portfolio-background">
-    <img class="big-image" />
-  </div>
 </Layout>
 
+<div class="portfolio-background">
+  <img class="big-image" />
+</div>
+
 <style>
+  article {
+    padding-block: 2rem;
+  }
+
   ul {
     display: grid;
     gap: 1rem;
@@ -95,16 +100,14 @@ const { artist } = Astro.props as Props;
     display: none;
     position: fixed;
     background-color: rgba(0, 0, 0, 0.8);
-    height: calc(100dvh - 7.5rem);
+    height: 100dvh;
     width: 100dvw;
-    top: 7.5rem;
-    bottom: 0;
-    right: 0;
-    left: 0;
+    inset: 0;
     padding: 2rem;
+    z-index: 2000;
 
     & img {
-      max-height: 100%;
+      max-height: 90dvh;
     }
   }
 
@@ -115,21 +118,38 @@ const { artist } = Astro.props as Props;
 </style>
 
 <script>
+  const body = document.body;
   const bigImageBg = document.querySelector('.portfolio-background');
-  const bigImage = document.querySelector('.big-image');
+  const bigImage = document.querySelector(
+    '.big-image'
+  ) as HTMLImageElement | null;
 
   document.querySelectorAll('ul.artist-portfolio button').forEach((button) => {
-    button.addEventListener('click', () => {
-      const imgUrl = button.dataset.imageSource;
+    (button as HTMLElement).addEventListener('click', () => {
+      const imgUrl = (button as HTMLElement).dataset.imageSource;
 
-      bigImage.src = imgUrl;
-      bigImageBg?.classList.add('open');
+      if (bigImage && imgUrl) {
+        bigImage.src = imgUrl;
+        body.dataset.mobileNavOpen = 'true';
+        bigImageBg?.classList.add('open');
+      }
     });
   });
 
+  function closeImage() {
+    if (!body || !bigImageBg) return;
+
+    body.dataset.mobileNavOpen = 'false';
+    bigImageBg.classList.remove('open');
+  }
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      bigImageBg?.classList.remove('open');
+      closeImage();
     }
+  });
+
+  bigImageBg?.addEventListener('click', () => {
+    closeImage();
   });
 </script>

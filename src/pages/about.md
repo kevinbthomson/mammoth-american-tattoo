@@ -1,5 +1,5 @@
 ---
-layout: ../layouts/Layout.astro
+layout: ../layouts/PageLayout.astro
 title: About Mammoth American Tattoo
 ---
 

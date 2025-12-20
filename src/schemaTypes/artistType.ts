@@ -30,7 +30,6 @@ export const artistType = defineType({
           title: 'Alternative Text',
         },
       ],
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'portfolio',

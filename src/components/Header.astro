@@ -72,3 +72,23 @@ import NavSecondary from './NavSecondary.astro';
     text-shadow: 0 1px 3px rgb(0, 0, 0, 0.624);
   }
 </style>
+
+<script>
+  function resizeHeader(el: HTMLElement, scrolled: string) {
+    el.dataset.scrolled = scrolled;
+  }
+
+  const header = document.querySelector(
+    'header.site-header'
+  ) as HTMLElement | null;
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+      if (header) resizeHeader(header, 'true');
+      // if (heroBanner) resizeHeader(heroBanner, 'true');
+    } else {
+      if (header) resizeHeader(header, 'false');
+      // if (heroBanner) resizeHeader(heroBanner, 'false');
+    }
+  });
+</script>

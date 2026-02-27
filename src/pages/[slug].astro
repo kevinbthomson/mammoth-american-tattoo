@@ -1,0 +1,56 @@
+---
+import { sanityClient } from 'sanity:client';
+// import imageUrlBuilder from '@sanity/image-url';
+import Layout from '../layouts/Layout.astro';
+import PortableText from '../components/PortableText.astro';
+import SanityImage from '../components/SanityImage.astro';
+import type { Page } from '../types/page';
+
+export async function getStaticPaths() {
+  const pages = await sanityClient.fetch(`*[_type == "page"]`);
+
+  return pages.map((page: Page) => {
+    return {
+      params: { slug: page.slug.current },
+      props: { page },
+    };
+  });
+}
+
+const { page } = Astro.props as Props;
+
+interface Props {
+  page: Page;
+}
+---
+
+<Layout title={page.title}>
+  <header>
+    <div class="container">
+      <h1>{page.title}</h1>
+    </div>
+  </header>
+
+  <article class="container">
+    <SanityImage
+      class="page-image"
+      mode="cover"
+      node={page.photo}
+      style={{ width: '100%' }}
+    />
+
+    {page.summary ? <h4>{page.summary}</h4> : null}
+
+    {page.body && <PortableText value={page.body} />}
+  </article>
+</Layout>
+
+<style>
+  .container {
+    max-width: 1024px;
+  }
+
+  .page-image {
+    width: 100%;
+  }
+</style>

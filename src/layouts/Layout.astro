@@ -8,6 +8,8 @@ const siteSettings = await sanityClient.fetch(`*[_type == "siteSettings"]`);
 const site = siteSettings[0];
 
 import '../styles/index.css';
+
+const isHomePage = Astro.props.isHomePage;
 ---
 
 <!doctype html>
@@ -29,7 +31,7 @@ import '../styles/index.css';
   </head>
   <body>
     <div class="page-layout">
-      <Header />
+      <Header isHomePage={isHomePage} />
       <main>
         <slot />
       </main>
@@ -37,3 +39,9 @@ import '../styles/index.css';
     </div>
   </body>
 </html>
+
+<style>
+  main {
+    padding-block: 2rem;
+  }
+</style>

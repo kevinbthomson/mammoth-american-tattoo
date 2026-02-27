@@ -1,28 +1,39 @@
 ---
 import { sanityClient } from 'sanity:client';
-import Layout from '../layouts/Layout.astro';
-// import GoogleMap from '../components/GoogleMap.astro';
+import Image from 'astro/components/Image.astro';
+import Hamburger from './Hamburger.astro';
+import Logo from '../assets/logo.png';
 const siteSettings = await sanityClient.fetch(`*[_type == "siteSettings"]`);
 
 const site = siteSettings[0];
 
 import Nav from './Nav.astro';
 import NavSecondary from './NavSecondary.astro';
+
+const isHomePage: boolean = Astro.props.isHomePage;
 ---
 
 <header class="site-header">
   <div class="container">
-    <a href=`tel:${site.phone}` title="Call us" class="logo">
-      <h4 class="new-rocker-regular">{site.phone}</h4>
-    </a>
     <Nav aria-label="Main" />
+    <a
+      href="/"
+      class="logo"
+      aria-label="Home"
+      style="display: flex; align-items: center; gap: 1rem;"
+    >
+      <h4 class="new-rocker-regular">Mammoth American</h4>
+    </a>
     <NavSecondary aria-label="Secondary" />
   </div>
+
+  <Hamburger />
 </header>
 
 <style>
   header.site-header {
-    background: #1c1c1c;
+    /* background: #1c1c1c; */
+    background: #000000;
     box-shadow: 0 0 20px rgb(0, 0, 0, 0.624);
     box-sizing: border-box;
     border-bottom: 0.5rem solid var(--primary-color);
@@ -63,7 +74,7 @@ import NavSecondary from './NavSecondary.astro';
     transition: all 0.3s;
 
     &:hover {
-      scale: 1.1;
+      scale: 1.05;
     }
   }
 

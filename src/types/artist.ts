@@ -14,6 +14,7 @@ export type Artist = {
     };
     alt?: string;
   };
+  instagram: string;
   portfolio?: {
     _type: 'image';
     asset: {

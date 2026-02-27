@@ -1,26 +1,28 @@
 import { defineField, defineType } from 'sanity';
 
-export const artistType = defineType({
-  name: 'artist',
-  title: 'Artists',
+export const pageType = defineType({
+  name: 'page',
+  title: 'Pages',
   type: 'document',
   fields: [
     defineField({
-      name: 'name',
+      name: 'title',
       type: 'string',
-      title: 'Nqme',
+      title: 'Title',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'slug',
       type: 'slug',
+      title: 'Slug',
       options: { source: 'title' },
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'image',
+      name: 'photo',
       type: 'image',
-      description: 'Image of the artist',
+      title: 'Photo',
+      description: 'Main photo for the page',
       options: {
         hotspot: true,
       },
@@ -33,35 +35,19 @@ export const artistType = defineType({
       ],
     }),
     defineField({
-      name: 'instagram',
+      name: 'summary',
       type: 'string',
-      title: 'Instagram handle',
-      // validation: (rule) => rule.required(),
+      title: 'Summary',
     }),
     defineField({
-      name: 'portfolio',
+      name: 'body',
       type: 'array',
-      title: 'Portfolio',
+      title: 'Body Copy',
       of: [
         {
-          name: 'image',
-          type: 'image',
-          title: 'Image',
-          options: {
-            hotspot: true,
-          },
-          fields: [
-            {
-              name: 'alt',
-              type: 'string',
-              title: 'Alternative text',
-            },
-          ],
+          type: 'block',
         },
       ],
-      options: {
-        layout: 'grid',
-      },
     }),
   ],
 });

@@ -8,12 +8,18 @@ html {
   font-size: 16px;
 }
 
+@media screen and (min-width: 768px) {
+  html {
+    font-size: 18px;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
   background-color: var(--primary-color);
   font-family: var(--body-font);
-  font-size: 1.2rem;
+  font-size: 1.375rem;
   font-weight: 400;
   line-height: 1.6;
   height: 100vh;
@@ -51,7 +57,8 @@ main {
   }
 }
 
-.artist-portfolio {
+.artist-portfolio,
+.artist-list {
   & img {
     border-radius: 0.25rem;
     transition: scale 0.2s;
@@ -87,6 +94,8 @@ main {
   }
 }
 
-ul {
-  padding: 0;
+article {
+  & ul {
+    padding-inline-start: 2rem;
+  }
 }

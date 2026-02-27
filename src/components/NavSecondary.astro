@@ -3,7 +3,7 @@ import { sanityClient } from 'sanity:client';
 
 const siteSettings = await sanityClient.fetch(`*[_type == "siteSettings"]`);
 
-const { email, facebook, instagram } = siteSettings[0];
+const { email, facebook, phone, instagram } = siteSettings[0];
 ---
 
 <nav aria-label="Secondary">
@@ -12,6 +12,9 @@ const { email, facebook, instagram } = siteSettings[0];
       <a href=`mailto:${email}` class="icon-link email" title="Email"
         >Email Signup</a
       >
+    </li>
+    <li class="call">
+      <a href=`tel:${phone}` title="Call us" class="icon-link call">{phone}</a>
     </li>
     <li class="facebook">
       <a
@@ -61,6 +64,7 @@ const { email, facebook, instagram } = siteSettings[0];
 
     &:hover {
       scale: 1.2;
+      bottom: 0.125rem;
     }
 
     &.instagram {
@@ -74,12 +78,21 @@ const { email, facebook, instagram } = siteSettings[0];
 
     &.facebook {
       background-image: url('data:image/svg+xml,%3Csvg width="32px" height="32px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"%3E%3Cg transform="matrix(0.03125,0,0,0.03125,-4.54747e-13,0.0971875)"%3E%3Cpath d="M1024,512C1024,229.23 794.77,0 512,0C229.23,0 0,229.23 0,512C0,767.554 187.231,979.37 432,1017.78L432,660L302,660L302,512L432,512L432,399.2C432,270.88 508.438,200 625.39,200C681.407,200 740,210 740,210L740,336L675.438,336C611.835,336 592,375.467 592,415.957L592,512L734,512L711.3,660L592,660L592,1017.78C836.769,979.37 1024,767.554 1024,512Z" style="fill:white;fill-rule:nonzero;"/%3E%3C/g%3E%3C/svg%3E');
+      display: none;
+    }
+
+    &.call {
+      background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%2224px%22%20viewBox%3D%220%20-960%20960%20960%22%20width%3D%2224px%22%20fill%3D%22%23e3e3e3%22%3E%3Cpath%20d%3D%22M798-120q-125%200-247-54.5T329-329Q229-429%20174.5-551T120-798q0-18%2012-30t30-12h162q14%200%2025%209.5t13%2022.5l26%20140q2%2016-1%2027t-11%2019l-97%2098q20%2037%2047.5%2071.5T387-386q31%2031%2065%2057.5t72%2048.5l94-94q9-9%2023.5-13.5T670-390l138%2028q14%204%2023%2014.5t9%2023.5v162q0%2018-12%2030t-30%2012ZM241-600l66-66-17-94h-89q5%2041%2014%2081t26%2079Zm358%20358q39%2017%2079.5%2027t81.5%2013v-88l-94-19-67%2067ZM241-600Zm358%20358Z%22%2F%3E%3C%2Fsvg%3E');
     }
   }
 
   @media screen and (min-width: 900px) {
     ul {
       gap: 1rem;
+    }
+
+    .icon-link.facebook {
+      display: block;
     }
   }
 </style>

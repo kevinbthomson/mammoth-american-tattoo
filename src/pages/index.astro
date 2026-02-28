@@ -2,6 +2,8 @@
 import { sanityClient } from 'sanity:client';
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
+import AboutSummary from '../components/AboutSummary.astro';
+import Artists from '../components/Artists.astro';
 import GoogleMap from '../components/GoogleMap.astro';
 import InstagramFeed from '../components/InstagramFeed.astro';
 const siteSettings = await sanityClient.fetch(`*[_type == "siteSettings"]`);
@@ -13,6 +15,8 @@ const site = siteSettings[0];
   <Hero />
   <!-- <h1>{site.siteTitle}</h1> -->
   <!-- <img src="/images/logo.png" alt="Mammoth American Tattoo" width="120px" /> -->
+  <AboutSummary />
+  <Artists />
   <InstagramFeed />
   <GoogleMap />
 </Layout>

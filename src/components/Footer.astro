@@ -56,7 +56,22 @@ const { siteTitle, address, phone, email, instagram, facebook } =
     background: black;
     color: #faf8f5;
     padding: 4rem 0 2rem;
-    /* margin-top: 2rem; */
+    position: relative;
+    overflow: hidden;
+  }
+
+  footer::after {
+    content: '';
+    position: absolute;
+    right: -5rem;
+    bottom: -5rem;
+    width: 400px;
+    height: 400px;
+    background-image: url('/images/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.625;
+    pointer-events: none;
   }
 
   .footer-content {

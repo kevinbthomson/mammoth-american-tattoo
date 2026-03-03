@@ -2,23 +2,30 @@
 import { sanityClient } from 'sanity:client';
 
 const siteSettings = await sanityClient.fetch(`*[_type == "siteSettings"][0]`);
-const aboutPage = await sanityClient.fetch(`*[_type == "page" && slug.current == "about"][0]`);
+const homePage = await sanityClient.fetch(`*[_type == "homePage"][0]`);
+const aboutPage = await sanityClient.fetch(
+  `*[_type == "page" && slug.current == "about"][0]`
+);
 
-const summary = aboutPage?.summary || siteSettings?.siteDescription;
-const title = aboutPage?.title || 'About Us';
+const summary = homePage?.aboutText || siteSettings?.siteDescription;
+const title = homePage?.aboutTitle || 'About Mammoth American Tattoo';
 ---
 
-{summary && (
-  <section class="about-summary container">
-    <h2>{title}</h2>
-    <p>{summary}</p>
-    {aboutPage && (
-      <div class="about-cta">
-        <a href="/about" class="button">Learn More</a>
-      </div>
-    )}
-  </section>
-)}
+{
+  summary && (
+    <section class="about-summary container">
+      <h2>{title}</h2>
+      <p>{summary}</p>
+      {aboutPage && (
+        <div class="about-cta">
+          <a href="/about" class="button">
+            Learn More
+          </a>
+        </div>
+      )}
+    </section>
+  )
+}
 
 <style>
   .about-summary {

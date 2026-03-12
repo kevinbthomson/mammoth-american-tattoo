@@ -8,26 +8,28 @@ const artists = await sanityClient.fetch(`*[_type == "artist"]`);
 
 <section class="artists">
   <div class="container">
-  <h2>Our Artists</h2>
+    <h2>Our Artists</h2>
 
-  <ul class="artist-grid">
-    {
-      artists.map((artist: Artist) => (
-        <li>
-          <a href={'/artists/' + artist.slug.current} class="artist-card">
-            <div class="artist-image">
-              <SanityImage node={artist.image} width={480} />
-            </div>
-            <h3>{artist.name}</h3>
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+    <ul class="artist-grid">
+      {
+        artists
+          .sort((a: Artist, b: Artist) => a.order - b.order)
+          .map((artist: Artist) => (
+            <li>
+              <a href={'/artists/' + artist.slug.current} class="artist-card">
+                <div class="artist-image">
+                  <SanityImage node={artist.image} width={480} />
+                </div>
+                <h3>{artist.name}</h3>
+              </a>
+            </li>
+          ))
+      }
+    </ul>
 
-  <div class="artists-cta">
-    <a href="/artists" class="button">View All Artists</a>
-  </div>
+    <div class="artists-cta">
+      <a href="/artists" class="button">View All Artists</a>
+    </div>
   </div>
 </section>
 

@@ -6,6 +6,7 @@ export type Artist = {
     current: string;
     _type: 'slug';
   };
+  order: number;
   image: {
     _type: 'image';
     asset: {

@@ -12,6 +12,13 @@ export const artistType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'order',
+      type: 'number',
+      title: 'Order',
+      validation: (rule) => rule.required(),
+      initialValue: 0,
+    }),
+    defineField({
       name: 'slug',
       type: 'slug',
       options: { source: 'title' },

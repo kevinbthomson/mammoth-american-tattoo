@@ -14,11 +14,11 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@astro-community/astro-embed-youtube": "^0.5.6",
+"@astro-community/astro-embed-youtube": "^0.5.10",
     "@astrojs/netlify": "^7.0.8",
     "@astrojs/prism": "^4.0.1",
     "@astrojs/react": "^5.0.4",
-    "@sanity/astro": "^3.2.10",
+"@sanity/astro": "^3.3.0",
     "@sanity/client": "^7.8.1",
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^4.22.0",

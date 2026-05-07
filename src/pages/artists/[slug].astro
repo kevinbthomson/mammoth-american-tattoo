@@ -7,6 +7,8 @@ import Layout from '../../layouts/Layout.astro';
 import SanityImage from '../../components/SanityImage.astro';
 import type { Artist } from '../../types/artist';
 import Loading from '../../components/Loading.astro';
+import ForwardIcon from '../../assets/chevron_forward.svg';
+import BackwardIcon from '../../assets/chevron_backward.svg';
 
 interface Props {
   artist: Artist;
@@ -75,7 +77,21 @@ const { artist } = Astro.props as Props;
 
     <div class="portfolio-background">
       <Loading />
+      <button
+        type="button"
+        class="lightbox-nav lightbox-nav--prev"
+        aria-label="Previous image"
+      >
+        <img src={BackwardIcon.src} width="24" height="24" alt="" />
+      </button>
       <img class="big-image" />
+      <button
+        type="button"
+        class="lightbox-nav lightbox-nav--next"
+        aria-label="Next image"
+      >
+        <img src={ForwardIcon.src} width="24" height="24" alt="" />
+      </button>
     </div>
   </article>
 </Layout>
@@ -145,15 +161,83 @@ const { artist } = Astro.props as Props;
     inset: 0;
     padding: 2rem;
     z-index: 2000;
+    user-select: none;
 
     & img {
       max-height: 90dvh;
       z-index: 2004;
     }
 
+    & .loader {
+      opacity: 0;
+      pointer-events: none;
+      z-index: 2010;
+      transition: opacity 0.15s ease-in-out;
+    }
+
+    &.is-loading .loader {
+      opacity: 1;
+    }
+
+    &.is-loading .big-image {
+      opacity: 0;
+    }
+
     &.open {
       display: grid;
       place-content: center;
+    }
+  }
+
+  .big-image {
+    opacity: 1;
+    transition: opacity 0.15s ease-in-out;
+  }
+
+  .lightbox-nav {
+    appearance: none;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: white;
+    cursor: pointer;
+    display: grid;
+    height: 3rem;
+    width: 3rem;
+    place-content: center;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2006;
+    font-size: 2rem;
+    line-height: 1;
+    transition:
+      background 0.15s ease-in-out,
+      transform 0.15s ease-in-out;
+  }
+
+  .lightbox-nav:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-50%) scale(1.04);
+  }
+
+  .lightbox-nav:active {
+    transform: translateY(-50%) scale(0.98);
+  }
+
+  .lightbox-nav--prev {
+    left: max(0.75rem, env(safe-area-inset-left));
+  }
+
+  .lightbox-nav--next {
+    right: max(0.75rem, env(safe-area-inset-right));
+  }
+
+  @media (max-width: 768px) {
+    .lightbox-nav {
+      display: none;
     }
   }
 
@@ -184,8 +268,26 @@ const { artist } = Astro.props as Props;
   const body = document.body;
   const bigImageBg = document.querySelector('.portfolio-background');
   const bigImage = document.querySelector('.big-image');
+  const previousButton = document.querySelector('.lightbox-nav--prev');
+  const nextButton = document.querySelector('.lightbox-nav--next');
 
   const imagesUrls = [];
+
+  function setLoading(isLoading) {
+    if (!bigImageBg) return;
+    bigImageBg.classList.toggle('is-loading', Boolean(isLoading));
+  }
+
+  function setBigImageSrc(src) {
+    if (!bigImage || !src) return;
+    setLoading(true);
+    bigImage.src = src;
+
+    // If the image is cached, `load` can be effectively instantaneous.
+    if (bigImage.complete) {
+      setLoading(false);
+    }
+  }
 
   document.querySelectorAll('ul.artist-portfolio button').forEach((button) => {
     if (window.innerWidth <= 768) return;
@@ -195,7 +297,7 @@ const { artist } = Astro.props as Props;
 
     button.addEventListener('click', () => {
       if (bigImage && imgUrl) {
-        bigImage.src = imgUrl;
+        setBigImageSrc(imgUrl);
         body.dataset.mobileNavOpen = 'true';
         bigImageBg?.classList.add('open');
       }
@@ -208,7 +310,7 @@ const { artist } = Astro.props as Props;
 
     if (currentIndex === imagesUrls.length - 1) return;
 
-    bigImage.src = imagesUrls[currentIndex + 1];
+    setBigImageSrc(imagesUrls[currentIndex + 1]);
   }
 
   function lightboxPrevious() {
@@ -217,7 +319,7 @@ const { artist } = Astro.props as Props;
 
     if (currentIndex === 0) return;
 
-    bigImage.src = imagesUrls[currentIndex - 1];
+    setBigImageSrc(imagesUrls[currentIndex - 1]);
   }
 
   function closeImage() {
@@ -225,10 +327,33 @@ const { artist } = Astro.props as Props;
 
     body.dataset.mobileNavOpen = 'false';
     bigImageBg.classList.remove('open');
+    setLoading(false);
   }
+
+  bigImage?.addEventListener('load', () => {
+    setLoading(false);
+  });
+
+  bigImage?.addEventListener('error', () => {
+    setLoading(false);
+  });
 
   bigImageBg?.addEventListener('click', () => {
     closeImage();
+  });
+
+  bigImage?.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+
+  previousButton?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    lightboxPrevious();
+  });
+
+  nextButton?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    lightboxNext();
   });
 
   document.addEventListener('keydown', (e) => {
